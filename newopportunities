@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NYC Internships and Summer Opportunities</title>
+    <style>
+      :root {
+        --bg: #f7f1e3;
+        --bg-deep: #f2e7cc;
+        --paper: #fffdf8;
+        --ink: #1f2a2f;
+        --muted: #5c676f;
+        --line: #d4c7a7;
+        --accent: #1d5f7a;
+        --urgent: #a62828;
+        --urgent-soft: #fde5e5;
+        --open: #1e6f4b;
+        --open-soft: #dff4e9;
+        --closed: #676767;
+        --closed-soft: #ececec;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 15% 10%, rgba(29, 95, 122, 0.08), transparent 35%),
+          radial-gradient(circle at 85% 5%, rgba(166, 40, 40, 0.06), transparent 30%),
+          linear-gradient(180deg, var(--bg), var(--bg-deep));
+        padding: 24px;
+      }
+
+      .board {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 46px rgba(17, 30, 34, 0.14);
+      }
+
+      .hero {
+        padding: 28px 28px 18px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(180deg, #fffaf0, #fffdf8);
+      }
+
+      .kicker {
+        margin: 0;
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+
+      h1 {
+        margin: 6px 0 10px;
+        font-size: clamp(28px, 3vw, 44px);
+        line-height: 1.08;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 70ch;
+      }
+
+      .urgent-strip {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 700;
+        font-size: 12px;
+      }
+
+      .chip.urgent {
+        color: var(--urgent);
+        background: var(--urgent-soft);
+        border-color: #efb8b8;
+      }
+
+      .chip.open {
+        color: var(--open);
+        background: var(--open-soft);
+        border-color: #b8dfca;
+      }
+
+      .chip.closed {
+        color: var(--closed);
+        background: var(--closed-soft);
+        border-color: #d4d4d4;
+      }
+
+      .content {
+        padding: 24px 28px 28px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .section-title {
+        grid-column: 1 / -1;
+        margin: 0;
+        font-size: 22px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+        background: #fffdf8;
+      }
+
+      .card h3 {
+        margin: 10px 0 8px;
+        font-size: 18px;
+      }
+
+      .meta {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .date {
+        margin: 10px 0 12px;
+        font-weight: 700;
+      }
+
+      .source {
+        font-size: 14px;
+      }
+
+      .source a {
+        color: var(--accent);
+      }
+
+      .footer-note {
+        grid-column: 1 / -1;
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @media (max-width: 860px) {
+        body {
+          padding: 14px;
+        }
+
+        .hero,
+        .content {
+          padding: 18px;
+        }
+
+        .content {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app"></main>
+    <script>
+      const TODAY_LABEL = "March 29, 2026";
+
+      const internships = [
+        {
+          group: "High School / Mixed",
+          name: "Summer Youth Employment Program (SYEP)",
+          audience: "Ages 14-24 (high school + college eligible)",
+          deadline: "March 14, 2026",
+          status: "Open",
+          detail: "Deadline updated from prior listing.",
+          sourceLabel: "ACCESS NYC SYEP",
+          sourceUrl: "https://access.nyc.gov/programs/summer-youth-employment-program-syep/"
+        },
+        {
+          group: "High School / Mixed",
+          name: "Ladders for Leaders",
+          audience: "Ages 16-24 (high school + college)",
+          deadline: "January 16, 2026",
+          status: "Closed",
+          detail: "Application deadline has passed.",
+          sourceLabel: "NYC DYCD Ladders for Leaders",
+          sourceUrl: "https://www.nyc.gov/site/dycd/services/jobs-internships/nyc-ladders-for-leaders.page"
+        },
+        {
+          group: "High School / Mixed",
+          name: "NYC Office of the Mayor Summer Internship",
+          audience: "High school and college students",
+          deadline: "March 29, 2026 (11:59 PM)",
+          status: "Open",
+          detail: "Application window opened February 23, 2026.",
+          sourceLabel: "NYC Mayor Internship Timeline",
+          sourceUrl: "https://a002-irm.nyc.gov/Handlers/Html/HtmlContent.ashx?pageId=af694de0-d2b9-423b-89a1-7c6a99043954"
+        },
+        {
+          group: "High School / Mixed",
+          name: "NYC SCA High School Summer Internship",
+          audience: "NYC high school students",
+          deadline: "March 6, 2026",
+          status: "Open",
+          detail: "Applications opened January 5, 2026.",
+          sourceLabel: "NYC SCA Internship Program",
+          sourceUrl: "https://nycsca.org/Careers/internship-Program"
+        },
+        {
+          group: "College / Graduate",
+          name: "NYC Comptroller Summer Internship",
+          audience: "College students",
+          deadline: "March 9, 2026",
+          status: "Open",
+          detail: "Standard spring deadline cycle.",
+          sourceLabel: "NYC Comptroller Internship Program",
+          sourceUrl: "https://comptroller.nyc.gov/jobs/summer-internship-program/"
+        },
+        {
+          group: "College / Graduate",
+          name: "NYC DDC Summer College/Graduate Intern",
+          audience: "College and graduate students",
+          deadline: "March 31, 2026",
+          status: "Open",
+          detail: "CityJobs postings show March 31 deadlines.",
+          sourceLabel: "NYC CityJobs DDC Posting",
+          sourceUrl: "https://cityjobs.nyc.gov/job/summer-college-intern-in-queens-jid-39547"
+        },
+        {
+          group: "College / Graduate",
+          name: "NYS Internship Program (NYC placements available)",
+          audience: "College and graduate students",
+          deadline: "April 24, 2026",
+          status: "Open",
+          detail: "Summer 2026 application window started February 3, 2026.",
+          sourceLabel: "NYS Internship Portal",
+          sourceUrl: "https://nysinternships.cs.ny.gov/"
+        },
+        {
+          group: "College / Graduate",
+          name: "MTA OIG Summer Law Student Internship",
+          audience: "Law students",
+          deadline: "February 27, 2026",
+          status: "Closed",
+          detail: "Rolling review; listed deadline has passed.",
+          sourceLabel: "MTA OIG Posting",
+          sourceUrl: "https://mtaig.ny.gov/Pages/Jobs/OIG-1078.aspx"
+        },
+        {
+          group: "College / Graduate",
+          name: "CUNY x MTA Internship Program",
+          audience: "CUNY students",
+          deadline: "Applications opened in February 2026",
+          status: "Open",
+          detail: "Program page does not show one hard cutoff date.",
+          sourceLabel: "CUNY MTA Internship Program",
+          sourceUrl: "https://www.cuny.edu/about/administration/offices/ocip/students/mta-internship-program/"
+        }
+      ];
+
+      const app = document.querySelector("#app");
+
+      function statusClass(status) {
+        if (status === "Urgent") return "urgent";
+        if (status === "Closed") return "closed";
+        return "open";
+      }
+
+      function renderSection(groupName) {
+        const items = internships.filter((item) => item.group === groupName);
+        return items
+          .map(
+            (item) => `
+              <article class="card">
+                <span class="chip ${statusClass(item.status)}">${item.status}</span>
+                <h3>${item.name}</h3>
+                <p class="meta">${item.audience}</p>
+                <p class="date">Deadline: ${item.deadline}</p>
+                <p class="meta">${item.detail}</p>
+                <p class="source">Source: <a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">${item.sourceLabel}</a></p>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      const urgentItems = internships.filter((item) => item.status === "Urgent");
+
+      app.innerHTML = `
+        <section class="board">
+          <header class="hero">
+            <p class="kicker">NYC Internship Roundup</p>
+            <h1>Internships and Summer Opportunities</h1>
+            <p>Last reviewed ${TODAY_LABEL}. Prioritize urgent items first, then open applications by deadline.</p>
+            <div class="urgent-strip">
+              ${
+                urgentItems.length
+                  ? urgentItems
+                      .map((item) => `<span class="chip urgent">${item.name}: ${item.deadline}</span>`)
+                      .join("")
+                  : '<span class="chip open">No urgent deadlines flagged today.</span>'
+              }
+            </div>
+          </header>
+
+          <section class="content">
+            <h2 class="section-title">High School / Mixed Programs</h2>
+            ${renderSection("High School / Mixed")}
+
+            <h2 class="section-title">College / Graduate Programs</h2>
+            ${renderSection("College / Graduate")}
+
+            <p class="footer-note">Dates are listed from each program page; confirm just before submitting since deadlines can change.</p>
+          </section>
+        </section>
+      `;
+    </script>
+  </body>
+</html>
