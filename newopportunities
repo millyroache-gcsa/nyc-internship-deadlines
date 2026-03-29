@@ -2,23 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NYC Internships and Summer Opportunities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NYC Student Opportunities</title>
     <style>
       :root {
         --bg: #f7f1e3;
-        --bg-deep: #f2e7cc;
+        --bg-deep: #eadfbe;
         --paper: #fffdf8;
-        --ink: #1f2a2f;
-        --muted: #5c676f;
-        --line: #d4c7a7;
-        --accent: #1d5f7a;
-        --urgent: #a62828;
-        --urgent-soft: #fde5e5;
-        --open: #1e6f4b;
-        --open-soft: #dff4e9;
-        --closed: #676767;
-        --closed-soft: #ececec;
+        --ink: #1d262b;
+        --muted: #5a6670;
+        --line: #d9cca8;
+        --accent: #135d78;
+        --accent-soft: #dceef5;
+        --alert: #9b1c1c;
+        --alert-soft: #fde4e4;
+        --success: #1a6a44;
+        --success-soft: #dff3e8;
       }
 
       * {
@@ -31,54 +30,110 @@
         font-family: "Avenir Next", "Segoe UI", sans-serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at 15% 10%, rgba(29, 95, 122, 0.08), transparent 35%),
-          radial-gradient(circle at 85% 5%, rgba(166, 40, 40, 0.06), transparent 30%),
+          radial-gradient(circle at 10% 10%, rgba(19, 93, 120, 0.09), transparent 34%),
+          radial-gradient(circle at 90% 8%, rgba(155, 28, 28, 0.06), transparent 28%),
           linear-gradient(180deg, var(--bg), var(--bg-deep));
         padding: 24px;
       }
 
-      .board {
-        max-width: 1100px;
+      .page {
+        max-width: 1180px;
         margin: 0 auto;
         background: var(--paper);
         border: 1px solid var(--line);
-        border-radius: 20px;
+        border-radius: 22px;
         overflow: hidden;
-        box-shadow: 0 20px 46px rgba(17, 30, 34, 0.14);
+        box-shadow: 0 20px 50px rgba(17, 30, 34, 0.12);
       }
 
       .hero {
-        padding: 28px 28px 18px;
+        padding: 30px 28px 20px;
         border-bottom: 1px solid var(--line);
-        background: linear-gradient(180deg, #fffaf0, #fffdf8);
+        background:
+          linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(255, 253, 248, 0.98)),
+          radial-gradient(circle at top right, rgba(19, 93, 120, 0.08), transparent 45%);
       }
 
-      .kicker {
+      .eyebrow {
         margin: 0;
         color: var(--accent);
-        font-weight: 700;
+        font-size: 12px;
+        font-weight: 800;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        font-size: 12px;
       }
 
       h1 {
-        margin: 6px 0 10px;
-        font-size: clamp(28px, 3vw, 44px);
-        line-height: 1.08;
+        margin: 8px 0 10px;
+        font-size: clamp(30px, 4vw, 48px);
+        line-height: 1.05;
       }
 
-      .hero p {
+      .hero-copy {
         margin: 0;
-        color: var(--muted);
         max-width: 70ch;
+        color: var(--muted);
+        font-size: 16px;
       }
 
-      .urgent-strip {
-        margin-top: 16px;
+      .hero-grid {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 16px;
+      }
+
+      .callout,
+      .legend {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+        background: rgba(255, 253, 248, 0.85);
+      }
+
+      .callout h2,
+      .legend h2,
+      .section-title {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+
+      .deadline-list,
+      .legend-list,
+      .detail-list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .deadline-list li,
+      .legend-list li,
+      .detail-list li {
+        margin: 8px 0;
+      }
+
+      .content {
+        padding: 24px 28px 30px;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+        background: #fffdf8;
+      }
+
+      .tag-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 10px;
       }
 
       .chip {
@@ -86,81 +141,59 @@
         align-items: center;
         padding: 6px 10px;
         border-radius: 999px;
-        border: 1px solid transparent;
-        font-weight: 700;
         font-size: 12px;
+        font-weight: 800;
+        border: 1px solid transparent;
       }
 
-      .chip.urgent {
-        color: var(--urgent);
-        background: var(--urgent-soft);
+      .chip.deadline {
+        color: var(--alert);
+        background: var(--alert-soft);
         border-color: #efb8b8;
       }
 
-      .chip.open {
-        color: var(--open);
-        background: var(--open-soft);
-        border-color: #b8dfca;
-      }
-
-      .chip.closed {
-        color: var(--closed);
-        background: var(--closed-soft);
-        border-color: #d4d4d4;
-      }
-
-      .content {
-        padding: 24px 28px 28px;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .section-title {
-        grid-column: 1 / -1;
-        margin: 0;
-        font-size: 22px;
-      }
-
-      .card {
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 16px;
-        background: #fffdf8;
+      .chip.info {
+        color: var(--accent);
+        background: var(--accent-soft);
+        border-color: #bdd8e4;
       }
 
       .card h3 {
-        margin: 10px 0 8px;
-        font-size: 18px;
+        margin: 0 0 8px;
+        font-size: 20px;
+        line-height: 1.15;
       }
 
-      .meta {
-        margin: 0;
+      .summary,
+      .meta,
+      .detail-list,
+      .link-row {
         color: var(--muted);
         font-size: 14px;
       }
 
-      .date {
-        margin: 10px 0 12px;
+      .summary,
+      .meta,
+      .link-row {
+        margin: 0 0 10px;
+      }
+
+      .label {
+        color: var(--ink);
         font-weight: 700;
       }
 
-      .source {
-        font-size: 14px;
-      }
-
-      .source a {
+      a {
         color: var(--accent);
       }
 
-      .footer-note {
-        grid-column: 1 / -1;
-        margin: 4px 0 0;
+      .note {
+        margin: 18px 0 0;
         color: var(--muted);
         font-size: 12px;
       }
 
-      @media (max-width: 860px) {
+      @media (max-width: 900px) {
         body {
           padding: 14px;
         }
@@ -170,7 +203,8 @@
           padding: 18px;
         }
 
-        .content {
+        .hero-grid,
+        .cards {
           grid-template-columns: 1fr;
         }
       }
@@ -179,154 +213,232 @@
   <body>
     <main id="app"></main>
     <script>
-      const TODAY_LABEL = "March 29, 2026";
+      const pageData = {
+        reviewed: "March 29, 2026",
+        urgentDeadlines: [
+          "CUNY College Now: April 8, 2026",
+          "Parsons Scholars: April 12, 2026",
+          "Mind-Builders Production Corps: April 13, 2026",
+          "NYRR Run for the Future: April 17, 2026",
+          "NYBG Explainer Program: April 22, 2026"
+        ],
+        opportunities: [
+          {
+            title: "Baruch STEP Academy",
+            tags: ["STEM", "College Readiness", "Grades 7-12"],
+            deadline: "No deadline listed",
+            summary: "Free STEM enrichment and college readiness program for students in grades 7-12.",
+            fit: "Strong fit for students with an 83+ GPA who are interested in STEM fields.",
+            details: [
+              "STEM coursework and enrichment",
+              "College readiness and academic support",
+              "Exposure to STEM careers"
+            ],
+            links: [
+              { label: "Learn more", url: "https://step.baruch.cuny.edu/" }
+            ]
+          },
+          {
+            title: "Spring 2026 Math Intensive Regents Prep Program",
+            tags: ["Math", "Regents Prep", "Saturdays"],
+            deadline: "No deadline listed",
+            summary: "Saturday math intensive for Algebra 1, Algebra 2, and Geometry.",
+            fit: "Good for students who want focused Regents prep in late spring.",
+            details: [
+              "Schedule: Saturdays, 9 AM-2 PM",
+              "Dates: May 9, May 16, May 30, June 6",
+              "No class on May 23"
+            ],
+            links: [
+              { label: "Apply", url: "https://baruch.az1.qualtrics.com/jfe/form/SV_1AAZaOSjDRjl9OK" }
+            ]
+          },
+          {
+            title: "Baruch STEP Summer 2026 Senior Program",
+            tags: ["Summer", "STEM", "Rising 10th-12th"],
+            deadline: "No deadline listed",
+            summary: "Summer enrichment program for rising 10th-12th graders.",
+            fit: "Strong fit for students who want a structured academic summer program.",
+            details: [
+              "Dates: July 6-July 30",
+              "Schedule: Monday-Thursday, 9:30 AM-2 PM"
+            ],
+            links: [
+              { label: "Apply", url: "https://baruch.az1.qualtrics.com/jfe/form/SV_8Ap9pROtCpxImI6" }
+            ]
+          },
+          {
+            title: "CUNY College Now (Summer 2026)",
+            tags: ["College Credit", "High School", "CUNY"],
+            deadline: "Apply by April 8, 2026",
+            summary: "Take free college courses and earn up to 15 college credits while still in high school.",
+            fit: "Best for NYC public high school students ready for college-level work.",
+            details: [
+              "Application window: March 27-April 8, 2026",
+              "NYC public high school students",
+              "75+ overall average and qualifying ELA scores",
+              "Some courses require higher grades"
+            ],
+            links: [
+              { label: "Apply", url: "https://cssa.cunyfirst.cuny.edu/psc/cnycsprd/GUEST/SA/c/OAA_ONLINE_APPLICATION.CU_ENTRY_VIST_PG.GBL?&" },
+              { label: "Learn more", url: "https://www.bcc.cuny.edu/academics/student-success-programs/college-now/" }
+            ]
+          },
+          {
+            title: "Parsons Scholars Program",
+            tags: ["Art + Design", "Portfolio", "Mentorship"],
+            deadline: "Apply by April 12, 2026",
+            summary: "Free 2.5-year college access and art and design program with mentorship and portfolio development.",
+            fit: "Best for students who are serious about art or design and can commit long-term.",
+            details: [
+              "Online application required",
+              "Portfolio of 5-10 pieces",
+              "Attend one info session"
+            ],
+            links: [
+              { label: "Apply + learn more", url: "https://scholars.parsons.edu/programs/parsons-scholars-program/application-hub/" }
+            ]
+          },
+          {
+            title: "Mind-Builders Production Corps",
+            tags: ["Paid", "Technical Production", "Ages 16-21"],
+            deadline: "Apply by April 13, 2026",
+            summary: "Paid program that teaches technical production skills like lighting, sound, and stage management.",
+            fit: "Great for students who like hands-on, behind-the-scenes technical work.",
+            details: [
+              "Train in live event and performance production",
+              "Work on real events and productions",
+              "Must complete work documentation"
+            ],
+            links: [
+              { label: "Apply", url: "https://forms.office.com/pages/responsepage.aspx?id=q8P9glPS7EClSv5m-Trtb1G1RlTjGDBFpag1oE5DsJFUNzhWMDZOT0s5UDNESUZVT09BRkk5TkcyWi4u&route=shorturl" },
+              { label: "Learn more", url: "https://www.mind-builders.org/programs/production-corps.html" }
+            ]
+          },
+          {
+            title: "NYRR Run for the Future",
+            tags: ["Girls Program", "Wellness", "Summer"],
+            deadline: "Apply by April 17, 2026",
+            summary: "Free 6-week summer program combining running, wellness, and community.",
+            fit: "Great for rising 10th-12th grade young women who want a supportive, non-academic summer program.",
+            details: [
+              "Train for and complete a 5K",
+              "Learn about fitness and self-care",
+              "Build confidence and community"
+            ],
+            links: [
+              { label: "Learn more", url: "https://www.nyrr.org/youth/youth-initiatives/nyrr-run-for-the-future" }
+            ]
+          },
+          {
+            title: "High School Explainer Program (NYBG)",
+            tags: ["Science", "Education", "Unpaid"],
+            deadline: "Apply by April 22, 2026",
+            summary: "Environmental education internship where students teach children about plants and science.",
+            fit: "Strong fit if you like working with kids, public speaking, and science. Less ideal if you need paid work.",
+            details: [
+              "Lead hands-on science activities for kids",
+              "Work as a museum educator",
+              "About 125 hours total across training and weekly shifts",
+              "Longer-term commitment, not just a short summer program"
+            ],
+            links: [
+              { label: "Apply", url: "https://www.surveymonkey.com/r/Explainerapplication" },
+              { label: "Learn more", url: "https://www.nybg.org/education/childrens-education/kids-teens/explainers/" }
+            ]
+          },
+          {
+            title: "Van Cortlandt Park Alliance: Garden 2 Market Internship",
+            tags: ["Gardening", "Food Systems", "Community"],
+            deadline: "No deadline listed",
+            summary: "Explore food systems, gardening, and community work through a summer internship.",
+            fit: "Great for students interested in the outdoors, gardens, food access, and community work.",
+            details: [
+              "Dates: June 29-August 14",
+              "Work in gardens and markets",
+              "Learn about food systems and community building"
+            ],
+            links: [
+              { label: "Apply", url: "https://docs.google.com/forms/d/e/1FAIpQLSc9JEoEJCvGaJPJsf1GM8uMA4ExqBXuKzVXMCMzjXfzXzTUIQ/viewform" }
+            ]
+          },
+          {
+            title: "Van Cortlandt Park Alliance: Urban Eco Teens Internship",
+            tags: ["Paid", "Environment", "Rising Juniors and Seniors"],
+            deadline: "No deadline listed",
+            summary: "Paid environmental internship focused on green careers and sustainability.",
+            fit: "Best for rising juniors and seniors who want paid summer work connected to environmental projects.",
+            details: [
+              "Dates: June 29-August 13",
+              "Schedule: Monday-Thursday, 9 AM-1 PM",
+              "$17 per hour",
+              "Focus on sustainability and green jobs"
+            ],
+            links: [
+              { label: "Apply", url: "https://docs.google.com/forms/d/e/1FAIpQLSdsrUBC4dvEynC429T0lxbFqyKkA9rBxbydF1wPDwSDkWznNg/viewform" }
+            ]
+          }
+        ]
+      };
 
-      const internships = [
-        {
-          group: "High School / Mixed",
-          name: "Summer Youth Employment Program (SYEP)",
-          audience: "Ages 14-24 (high school + college eligible)",
-          deadline: "March 14, 2026",
-          status: "Open",
-          detail: "Deadline updated from prior listing.",
-          sourceLabel: "ACCESS NYC SYEP",
-          sourceUrl: "https://access.nyc.gov/programs/summer-youth-employment-program-syep/"
-        },
-        {
-          group: "High School / Mixed",
-          name: "Ladders for Leaders",
-          audience: "Ages 16-24 (high school + college)",
-          deadline: "January 16, 2026",
-          status: "Closed",
-          detail: "Application deadline has passed.",
-          sourceLabel: "NYC DYCD Ladders for Leaders",
-          sourceUrl: "https://www.nyc.gov/site/dycd/services/jobs-internships/nyc-ladders-for-leaders.page"
-        },
-        {
-          group: "High School / Mixed",
-          name: "NYC Office of the Mayor Summer Internship",
-          audience: "High school and college students",
-          deadline: "March 29, 2026 (11:59 PM)",
-          status: "Open",
-          detail: "Application window opened February 23, 2026.",
-          sourceLabel: "NYC Mayor Internship Timeline",
-          sourceUrl: "https://a002-irm.nyc.gov/Handlers/Html/HtmlContent.ashx?pageId=af694de0-d2b9-423b-89a1-7c6a99043954"
-        },
-        {
-          group: "High School / Mixed",
-          name: "NYC SCA High School Summer Internship",
-          audience: "NYC high school students",
-          deadline: "March 6, 2026",
-          status: "Open",
-          detail: "Applications opened January 5, 2026.",
-          sourceLabel: "NYC SCA Internship Program",
-          sourceUrl: "https://nycsca.org/Careers/internship-Program"
-        },
-        {
-          group: "College / Graduate",
-          name: "NYC Comptroller Summer Internship",
-          audience: "College students",
-          deadline: "March 9, 2026",
-          status: "Open",
-          detail: "Standard spring deadline cycle.",
-          sourceLabel: "NYC Comptroller Internship Program",
-          sourceUrl: "https://comptroller.nyc.gov/jobs/summer-internship-program/"
-        },
-        {
-          group: "College / Graduate",
-          name: "NYC DDC Summer College/Graduate Intern",
-          audience: "College and graduate students",
-          deadline: "March 31, 2026",
-          status: "Open",
-          detail: "CityJobs postings show March 31 deadlines.",
-          sourceLabel: "NYC CityJobs DDC Posting",
-          sourceUrl: "https://cityjobs.nyc.gov/job/summer-college-intern-in-queens-jid-39547"
-        },
-        {
-          group: "College / Graduate",
-          name: "NYS Internship Program (NYC placements available)",
-          audience: "College and graduate students",
-          deadline: "April 24, 2026",
-          status: "Open",
-          detail: "Summer 2026 application window started February 3, 2026.",
-          sourceLabel: "NYS Internship Portal",
-          sourceUrl: "https://nysinternships.cs.ny.gov/"
-        },
-        {
-          group: "College / Graduate",
-          name: "MTA OIG Summer Law Student Internship",
-          audience: "Law students",
-          deadline: "February 27, 2026",
-          status: "Closed",
-          detail: "Rolling review; listed deadline has passed.",
-          sourceLabel: "MTA OIG Posting",
-          sourceUrl: "https://mtaig.ny.gov/Pages/Jobs/OIG-1078.aspx"
-        },
-        {
-          group: "College / Graduate",
-          name: "CUNY x MTA Internship Program",
-          audience: "CUNY students",
-          deadline: "Applications opened in February 2026",
-          status: "Open",
-          detail: "Program page does not show one hard cutoff date.",
-          sourceLabel: "CUNY MTA Internship Program",
-          sourceUrl: "https://www.cuny.edu/about/administration/offices/ocip/students/mta-internship-program/"
-        }
-      ];
-
-      const app = document.querySelector("#app");
-
-      function statusClass(status) {
-        if (status === "Urgent") return "urgent";
-        if (status === "Closed") return "closed";
-        return "open";
+      function renderLinks(links) {
+        return links
+          .map((link) => `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`)
+          .join(" | ");
       }
 
-      function renderSection(groupName) {
-        const items = internships.filter((item) => item.group === groupName);
-        return items
+      function renderCards() {
+        return pageData.opportunities
           .map(
             (item) => `
               <article class="card">
-                <span class="chip ${statusClass(item.status)}">${item.status}</span>
-                <h3>${item.name}</h3>
-                <p class="meta">${item.audience}</p>
-                <p class="date">Deadline: ${item.deadline}</p>
-                <p class="meta">${item.detail}</p>
-                <p class="source">Source: <a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">${item.sourceLabel}</a></p>
+                <div class="tag-row">
+                  <span class="chip deadline">${item.deadline}</span>
+                  ${item.tags.map((tag) => `<span class="chip info">${tag}</span>`).join("")}
+                </div>
+                <h3>${item.title}</h3>
+                <p class="summary">${item.summary}</p>
+                <p class="meta"><span class="label">Good fit if:</span> ${item.fit}</p>
+                <ul class="detail-list">
+                  ${item.details.map((detail) => `<li>${detail}</li>`).join("")}
+                </ul>
+                <p class="link-row">${renderLinks(item.links)}</p>
               </article>
             `
           )
           .join("");
       }
 
-      const urgentItems = internships.filter((item) => item.status === "Urgent");
-
-      app.innerHTML = `
-        <section class="board">
+      document.querySelector("#app").innerHTML = `
+        <section class="page">
           <header class="hero">
-            <p class="kicker">NYC Internship Roundup</p>
-            <h1>Internships and Summer Opportunities</h1>
-            <p>Last reviewed ${TODAY_LABEL}. Prioritize urgent items first, then open applications by deadline.</p>
-            <div class="urgent-strip">
-              ${
-                urgentItems.length
-                  ? urgentItems
-                      .map((item) => `<span class="chip urgent">${item.name}: ${item.deadline}</span>`)
-                      .join("")
-                  : '<span class="chip open">No urgent deadlines flagged today.</span>'
-              }
+            <p class="eyebrow">NYC Student Opportunities</p>
+            <h1>Spring and Summer 2026 Programs</h1>
+            <p class="hero-copy">A curated board of current opportunities for NYC middle and high school students, with deadlines and application links in one place.</p>
+            <div class="hero-grid">
+              <section class="callout">
+                <h2>Coming Up Soon</h2>
+                <ul class="deadline-list">
+                  ${pageData.urgentDeadlines.map((item) => `<li>${item}</li>`).join("")}
+                </ul>
+              </section>
+              <section class="legend">
+                <h2>How To Use This Page</h2>
+                <ul class="legend-list">
+                  <li>Start with the programs that have April deadlines.</li>
+                  <li>Programs labeled "No deadline listed" should be checked as soon as possible.</li>
+                  <li>Open every application link in a new tab and confirm details before submitting.</li>
+                </ul>
+              </section>
             </div>
           </header>
 
           <section class="content">
-            <h2 class="section-title">High School / Mixed Programs</h2>
-            ${renderSection("High School / Mixed")}
-
-            <h2 class="section-title">College / Graduate Programs</h2>
-            ${renderSection("College / Graduate")}
-
-            <p class="footer-note">Dates are listed from each program page; confirm just before submitting since deadlines can change.</p>
+            <h2 class="section-title">Programs and Applications</h2>
+            <div class="cards">
+              ${renderCards()}
+            </div>
+            <p class="note">Last updated ${pageData.reviewed}. This page is manually curated, so confirm final details on each program site.</p>
           </section>
         </section>
       `;
