@@ -16,12 +16,14 @@
         --accent-soft: #dceef5;
         --alert: #9b1c1c;
         --alert-soft: #fde4e4;
-        --success: #1a6a44;
-        --success-soft: #dff3e8;
       }
 
       * {
         box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
@@ -71,45 +73,43 @@
 
       .hero-copy {
         margin: 0;
-        max-width: 70ch;
+        max-width: 78ch;
         color: var(--muted);
         font-size: 16px;
       }
 
-      .hero-grid {
+      .callout {
         margin-top: 18px;
-        display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 16px;
-      }
-
-      .callout,
-      .legend {
         border: 1px solid var(--line);
         border-radius: 16px;
         padding: 16px;
-        background: rgba(255, 253, 248, 0.85);
+        background: rgba(255, 253, 248, 0.9);
       }
 
       .callout h2,
-      .legend h2,
       .section-title {
-        margin: 0 0 10px;
+        margin: 0 0 12px;
         font-size: 18px;
       }
 
-      .deadline-list,
-      .legend-list,
-      .detail-list {
+      .jump-list {
         margin: 0;
         padding-left: 18px;
         color: var(--muted);
       }
 
-      .deadline-list li,
-      .legend-list li,
-      .detail-list li {
+      .jump-list li {
         margin: 8px 0;
+      }
+
+      .jump-list a {
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .jump-list a:hover {
+        text-decoration: underline;
       }
 
       .content {
@@ -183,6 +183,15 @@
         font-weight: 700;
       }
 
+      .detail-list {
+        margin: 0 0 12px;
+        padding-left: 18px;
+      }
+
+      .detail-list li {
+        margin: 8px 0;
+      }
+
       a {
         color: var(--accent);
       }
@@ -203,7 +212,6 @@
           padding: 18px;
         }
 
-        .hero-grid,
         .cards {
           grid-template-columns: 1fr;
         }
@@ -214,65 +222,63 @@
     <main id="app"></main>
     <script>
       const pageData = {
-        reviewed: "March 29, 2026",
-        urgentDeadlines: [
-          "CUNY College Now: April 8, 2026",
-          "Parsons Scholars: April 12, 2026",
-          "Mind-Builders Production Corps: April 13, 2026",
-          "NYRR Run for the Future: April 17, 2026",
-          "NYBG Explainer Program: April 22, 2026"
+        reviewed: "March 31, 2026",
+        topLinks: [
+          { label: "Baruch STEP Academy Spring 2026 Intensive", target: "baruch-intensive", deadline: "April 10, 2026" },
+          { label: "Baruch STEP Academy Senior Program", target: "baruch-senior", deadline: "April 15, 2026" },
+          { label: "CUNY College Now", target: "cuny-college-now", deadline: "April 8, 2026" },
+          { label: "Parsons Scholars Program", target: "parsons-scholars", deadline: "April 12, 2026" },
+          { label: "Mind-Builders Production Corps", target: "mind-builders", deadline: "April 13, 2026" },
+          { label: "NYRR Run for the Future", target: "nyrr-run-for-the-future", deadline: "April 17, 2026" },
+          { label: "High School Explainer Program", target: "nybg-explainers", deadline: "April 22, 2026" },
+          { label: "Van Cortlandt Park Garden 2 Market", target: "garden-2-market", deadline: "No deadline listed" },
+          { label: "Urban Eco Teens Internship", target: "urban-eco-teens", deadline: "No deadline listed" }
         ],
         opportunities: [
           {
-            title: "Baruch STEP Academy",
-            tags: ["STEM", "College Readiness", "Grades 7-12"],
-            deadline: "No deadline listed",
-            summary: "Free STEM enrichment and college readiness program for students in grades 7-12.",
-            fit: "Strong fit for students with an 83+ GPA who are interested in STEM fields.",
+            id: "baruch-intensive",
+            title: "Baruch STEP Academy Spring 2026 Intensive",
+            tags: ["Baruch STEP", "Math", "Regents Prep"],
+            deadline: "Apply by April 10, 2026",
+            summary: "Spring math intensive Regents prep program through Baruch STEP Academy.",
+            fit: "Good for students who want focused math support and Regents preparation in late spring.",
             details: [
-              "STEM coursework and enrichment",
-              "College readiness and academic support",
-              "Exposure to STEM careers"
-            ],
-            links: [
-              { label: "Learn more", url: "https://step.baruch.cuny.edu/" }
-            ]
-          },
-          {
-            title: "Spring 2026 Math Intensive Regents Prep Program",
-            tags: ["Math", "Regents Prep", "Saturdays"],
-            deadline: "No deadline listed",
-            summary: "Saturday math intensive for Algebra 1, Algebra 2, and Geometry.",
-            fit: "Good for students who want focused Regents prep in late spring.",
-            details: [
+              "Courses: Algebra 1, Algebra 2, Geometry",
               "Schedule: Saturdays, 9 AM-2 PM",
               "Dates: May 9, May 16, May 30, June 6",
               "No class on May 23"
             ],
             links: [
-              { label: "Apply", url: "https://baruch.az1.qualtrics.com/jfe/form/SV_1AAZaOSjDRjl9OK" }
+              { label: "Apply", url: "https://baruch.az1.qualtrics.com/jfe/form/SV_1AAZaOSjDRjl9OK" },
+              { label: "Baruch STEP website", url: "https://step.baruch.cuny.edu/" }
             ]
           },
           {
-            title: "Baruch STEP Summer 2026 Senior Program",
-            tags: ["Summer", "STEM", "Rising 10th-12th"],
-            deadline: "No deadline listed",
-            summary: "Summer enrichment program for rising 10th-12th graders.",
-            fit: "Strong fit for students who want a structured academic summer program.",
+            id: "baruch-senior",
+            title: "Baruch STEP Academy Senior Program",
+            tags: ["Baruch STEP", "Summer", "Rising 10th-12th"],
+            deadline: "Apply by April 15, 2026",
+            summary: "Summer 2026 Baruch STEP program for rising 10th-12th graders.",
+            fit: "Strong fit for students interested in STEM enrichment, college readiness, and structured summer programming.",
             details: [
+              "Free STEM enrichment and college readiness support",
+              "For rising 10th-12th graders",
               "Dates: July 6-July 30",
-              "Schedule: Monday-Thursday, 9:30 AM-2 PM"
+              "Schedule: Monday-Thursday, 9:30 AM-2 PM",
+              "Strong academic record recommended"
             ],
             links: [
-              { label: "Apply", url: "https://baruch.az1.qualtrics.com/jfe/form/SV_8Ap9pROtCpxImI6" }
+              { label: "Apply", url: "https://baruch.az1.qualtrics.com/jfe/form/SV_8Ap9pROtCpxImI6" },
+              { label: "Baruch STEP website", url: "https://step.baruch.cuny.edu/" }
             ]
           },
           {
+            id: "cuny-college-now",
             title: "CUNY College Now (Summer 2026)",
             tags: ["College Credit", "High School", "CUNY"],
             deadline: "Apply by April 8, 2026",
             summary: "Take free college courses and earn up to 15 college credits while still in high school.",
-            fit: "Best for NYC public high school students ready for college-level work.",
+            fit: "Best for NYC public high school students who want early college credit and are ready for college-level work.",
             details: [
               "Application window: March 27-April 8, 2026",
               "NYC public high school students",
@@ -285,6 +291,7 @@
             ]
           },
           {
+            id: "parsons-scholars",
             title: "Parsons Scholars Program",
             tags: ["Art + Design", "Portfolio", "Mentorship"],
             deadline: "Apply by April 12, 2026",
@@ -300,6 +307,7 @@
             ]
           },
           {
+            id: "mind-builders",
             title: "Mind-Builders Production Corps",
             tags: ["Paid", "Technical Production", "Ages 16-21"],
             deadline: "Apply by April 13, 2026",
@@ -308,6 +316,7 @@
             details: [
               "Train in live event and performance production",
               "Work on real events and productions",
+              "Learn from industry professionals",
               "Must complete work documentation"
             ],
             links: [
@@ -316,6 +325,7 @@
             ]
           },
           {
+            id: "nyrr-run-for-the-future",
             title: "NYRR Run for the Future",
             tags: ["Girls Program", "Wellness", "Summer"],
             deadline: "Apply by April 17, 2026",
@@ -331,7 +341,8 @@
             ]
           },
           {
-            title: "High School Explainer Program (NYBG)",
+            id: "nybg-explainers",
+            title: "High School Explainer Program (New York Botanical Garden)",
             tags: ["Science", "Education", "Unpaid"],
             deadline: "Apply by April 22, 2026",
             summary: "Environmental education internship where students teach children about plants and science.",
@@ -339,8 +350,9 @@
             details: [
               "Lead hands-on science activities for kids",
               "Work as a museum educator",
+              "Learn plant science and public speaking",
               "About 125 hours total across training and weekly shifts",
-              "Longer-term commitment, not just a short summer program"
+              "Ongoing commitment, not just a short summer program"
             ],
             links: [
               { label: "Apply", url: "https://www.surveymonkey.com/r/Explainerapplication" },
@@ -348,10 +360,11 @@
             ]
           },
           {
+            id: "garden-2-market",
             title: "Van Cortlandt Park Alliance: Garden 2 Market Internship",
             tags: ["Gardening", "Food Systems", "Community"],
             deadline: "No deadline listed",
-            summary: "Explore food systems, gardening, and community work through a summer internship.",
+            summary: "Summer internship exploring food systems, gardening, and community work.",
             fit: "Great for students interested in the outdoors, gardens, food access, and community work.",
             details: [
               "Dates: June 29-August 14",
@@ -363,6 +376,7 @@
             ]
           },
           {
+            id: "urban-eco-teens",
             title: "Van Cortlandt Park Alliance: Urban Eco Teens Internship",
             tags: ["Paid", "Environment", "Rising Juniors and Seniors"],
             deadline: "No deadline listed",
@@ -391,7 +405,7 @@
         return pageData.opportunities
           .map(
             (item) => `
-              <article class="card">
+              <article class="card" id="${item.id}">
                 <div class="tag-row">
                   <span class="chip deadline">${item.deadline}</span>
                   ${item.tags.map((tag) => `<span class="chip info">${tag}</span>`).join("")}
@@ -414,23 +428,15 @@
           <header class="hero">
             <p class="eyebrow">NYC Student Opportunities</p>
             <h1>Spring and Summer 2026 Programs</h1>
-            <p class="hero-copy">A curated board of current opportunities for NYC middle and high school students, with deadlines and application links in one place.</p>
-            <div class="hero-grid">
-              <section class="callout">
-                <h2>Coming Up Soon</h2>
-                <ul class="deadline-list">
-                  ${pageData.urgentDeadlines.map((item) => `<li>${item}</li>`).join("")}
-                </ul>
-              </section>
-              <section class="legend">
-                <h2>How To Use This Page</h2>
-                <ul class="legend-list">
-                  <li>Start with the programs that have April deadlines.</li>
-                  <li>Programs labeled "No deadline listed" should be checked as soon as possible.</li>
-                  <li>Open every application link in a new tab and confirm details before submitting.</li>
-                </ul>
-              </section>
-            </div>
+            <p class="hero-copy">Current opportunities for high school students. More opportunities for college students will be posted soon.</p>
+            <section class="callout">
+              <h2>Current Open Programs</h2>
+              <ul class="jump-list">
+                ${pageData.topLinks
+                  .map((item) => `<li><a href="#${item.target}">${item.label}</a> <span>(${item.deadline})</span></li>`)
+                  .join("")}
+              </ul>
+            </section>
           </header>
 
           <section class="content">
