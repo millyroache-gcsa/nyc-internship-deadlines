@@ -166,15 +166,13 @@
 
       .summary,
       .meta,
-      .detail-list,
-      .link-row {
+      .detail-list {
         color: var(--muted);
         font-size: 14px;
       }
 
       .summary,
-      .meta,
-      .link-row {
+      .meta {
         margin: 0 0 10px;
       }
 
@@ -190,6 +188,32 @@
 
       .detail-list li {
         margin: 8px 0;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .button-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #fffdf8;
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .button-link.secondary {
+        background: transparent;
+        color: var(--accent);
       }
 
       a {
@@ -399,8 +423,11 @@
 
       function renderLinks(links) {
         return links
-          .map((link) => `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`)
-          .join(" | ");
+          .map((link, index) => {
+            const extraClass = index === 0 ? "" : " secondary";
+            return `<a class="button-link${extraClass}" href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`;
+          })
+          .join("");
       }
 
       function renderCards() {
@@ -418,7 +445,7 @@
                 <ul class="detail-list">
                   ${item.details.map((detail) => `<li>${detail}</li>`).join("")}
                 </ul>
-                <p class="link-row">${renderLinks(item.links)}</p>
+                <div class="button-row">${renderLinks(item.links)}</div>
               </article>
             `
           )
